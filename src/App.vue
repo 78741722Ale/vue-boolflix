@@ -32,6 +32,7 @@
             <!-- Voto -->  
             <li>{{movie.vote_average}} </li> 
             <!-- Bandierine dei film -->
+            <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(movie.original_language)" />
         </ul>
       </div>
@@ -90,7 +91,7 @@ export default {
     filtherFlag(flagFilter){
       /* Condizionale */
       if(flagFilter == 'en') {
-        return flagFilter = 'us'
+        return flagFilter = 'gb'
       } else {
         return flagFilter
       }
