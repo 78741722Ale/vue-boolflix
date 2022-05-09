@@ -1,0 +1,134 @@
+/* Utilities del file App.vue */
+
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Proprietà del id APP */
+  width: 100vw; /* Altezza e larghezza */
+  height: 100vh;
+  margin: 0 auto; /* Centraggio Perfetto */
+  overflow-x: hidden; /* Nascosto Overflow X */
+  /* overflow-y: hidden; */ /* Nascosto Overflow Y */
+}
+
+/*#region Regole Principali di Col e Row  */
+
+/* Container Principale */
+.container {
+  width: 1200px;
+  /* Row - Regole*/
+  .row {
+    width: 100%;
+
+  }
+}
+
+/* Prime Colonne iniziali, andranno poi rimosse */
+.col-md {
+  width: calc(100% / 12) * 6; // Col MD è da 6
+}
+.col-sm {
+  width: calc(100% / 12) * 3; // Col SM è da 6
+}
+.col-lg {
+  width: calc(100% / 12) * 9; // Col LG è da 9
+}
+
+/* Bordo per rendere visibile, poi da rimuovere */
+.col-sm,
+.col-md,
+.col-lg {
+  border: 2px solid black;
+}
+/*#endregion */
+
+/* Colori di Prova, poi andranno rimossi */
+.bg_try {
+  background-color: rgb(9, 72, 245);
+}
+.bg_contrast {
+  background-color: rgb(226, 241, 3);
+}
+
+.bg_crimson {
+  background-color: crimson;
+}
+
+
+/* Larghezze di prova */
+.w_sm {
+  width: 25%;
+}
+.w_md {
+  width: 50%;
+}
+.w_lg {
+  width: 75%;
+}
+.w_xl {
+  width: 100%;
+}
+
+/* Centraggio in mezzo alla pagina */
+.mar_auto {
+  margin: 0 auto;
+}
+
+.mar_top {
+  margin-top: 50px;
+}
+
+/* Altezze di prova */
+.h_sm {
+  height: 25%;
+}
+.h_md {
+  height: 50%;
+  border: 2px solid black;
+}
+.h_lg {
+  height: 75%;
+}
+.h_xl {
+  height: 100%;
+}
+
+/* Altezze Fisse in PX (da rimuovere) */
+.h_px_sm {
+  height: 100px;
+}
+.h_px_md {
+  height: 250px;
+}
+.h_px_lg {
+  height: 1250px;
+}
+
+/* Regole di Dispaly Flex */
+.flex_cent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex_between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex_col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+    padding-bottom: 2rem;
+    li {
+        line-height: 1.35rem;
+        list-style: none;
+    }
+}
