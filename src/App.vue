@@ -31,7 +31,7 @@
             <li>{{movie.original_language}}</li>
             <!-- Voto -->  
             <li>{{movie.vote_average}} </li> 
-
+            <!-- Bandierine dei film -->
             <flag :iso="movie.original_language" />
         </ul>
       </div>
