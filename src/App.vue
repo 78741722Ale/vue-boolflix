@@ -1,20 +1,22 @@
 <template>
   <div id="app">
     <!-- First Container -->
-    <div class="container">
+    <div class="container bg_try h_px_sm mar_auto">
       <!-- First Row -->
-      <div class="row">
-
-
+      <div class="row flex_between h_xl">
+        <!-- Logo Netflix -->
+        <div class="col-sm bg_contrast h_xl flex_cent">
+          <img src="@/assets/logo.png" alt="">
+        </div>
+        <!-- Input Type Text -->
+        <div class="col-sm p_sm bg_contrast h_xl flex_cent">
+          <!-- SearchBar -->
+          <input class="h_sm" type="text" placeholder="Cerca un Film">
+          <button class="h_sm" type="submit">Cerca</button>  
+        </div>
       </div>
     </div>
-    
-    
-    <!-- SearchBar -->
-    <input type="text" placeholder="Cerca un Film">
-    <button type="submit">Premi</button>
-
-
+    <!-- Second Container -->
   </div>
 </template>
 
@@ -47,9 +49,7 @@ export default {
   overflow-y: hidden;
 }
 
-
 /*#region Regole Principali di Col e Row  */
-
 
 /* Container Principale */
 .container {
@@ -95,6 +95,11 @@ export default {
   width: 100%;
 }
 
+/* Centraggio in mezzo alla pagina */
+.mar_auto {
+  margin: 0 auto;
+}
+
 /* Altezze di prova */
 .h_sm {
   height: 25%;
@@ -109,16 +114,28 @@ export default {
   height: 100%;
 }
 
+/* Altezze Fisse in PX (da rimuovere) */
+.h_px_sm {
+  height: 100px;
+}
+.h_px_md {
+  height: 250px;
+}
+.h_px_lg {
+  height: 250px;
+}
+
 /* Regole di Dispaly Flex */
 .flex_cent {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-
-
-
+.flex_between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 
 </style>
