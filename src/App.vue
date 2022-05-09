@@ -32,7 +32,7 @@
             <!-- Voto -->  
             <li>{{movie.vote_average}} </li> 
             <!-- Bandierine dei film -->
-            <flag v-html="filtherFlag" :iso="movie.original_language" />
+            <flag :iso="filtherFlag(movie.original_language)" />
         </ul>
       </div>
     </div>
@@ -82,17 +82,23 @@ export default {
       state.searchFilm = this.searchFilm; 
       console.log(state.searchFilm); // Console log di verifica
     },
-    /* Method per il filtro delle bandierine */
-    filtherFlag() {
-      if(this.movie.original_language == 'en') {
-        return <flag iso="us" />
+    /* Method per filtrare le bandiere */
+    /**
+     * filtherFlag => Method per filtrare la bandiera degli US
+     * flagFilter => movie.original_language 
+     */
+    filtherFlag(flagFilter){
+      /* Condizionale */
+      if(flagFilter == 'en') {
+        return flagFilter = 'us'
+      } else {
+        return flagFilter
       }
     }
   },
   mounted() {
     this.filtherFilms() // richiamo la mia function nel mounted
-    this.filtherFlag()
-  }
+  },
 }
 </script>
 
