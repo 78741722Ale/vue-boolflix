@@ -56,6 +56,7 @@ export default {
   data() {
     return {
       movies: null, // Array inizialmente vuoto
+      series: null,
       /* loading: true : per ora non so se serve */ 
       /* error: null, : per ora non so se serve */
       searchFilm: '', // Metodo per ricercare il film => questo nel v-model
