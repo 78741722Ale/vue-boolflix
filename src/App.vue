@@ -30,7 +30,9 @@
             <!-- Lingua del Film prodotto -->
             <li>{{movie.original_language}}</li>
             <!-- Voto -->  
-            <li>{{movie.vote_average}}</li>  
+            <li>{{movie.vote_average}} </li> 
+
+            <flag :iso="movie.original_language" />
         </ul>
       </div>
     </div>
@@ -73,13 +75,13 @@ export default {
         this.error = `Sorry There is a problem! ${error}`;
       }) 
     },
-    /* Method per il search dell'input */
+    /* Method per il search dell'input (servirà quando avro bisogno di Emit) */
     searchMethod(){
       console.log('Searching...');
       console.log(this.searchFilm);
       state.searchFilm = this.searchFilm; 
       console.log(state.searchFilm); // Console log di verifica
-    }
+    },
   },
   mounted() {
     this.filtherFilms() // richiamo la mia function nel mounted
