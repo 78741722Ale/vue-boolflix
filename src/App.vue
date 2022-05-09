@@ -5,26 +5,39 @@
       <!-- First Row -->
       <div class="row flex_between h_xl">
         <!-- Logo Netflix -->
-        <div class="col-sm bg_contrast h_xl flex_cent">
+        <div class="col-sm h_xl flex_cent">
           <img src="@/assets/logo.png" alt="">
         </div>
         <!-- Input Type Text -->
-        <div class="col-sm p_sm bg_contrast h_xl flex_cent">
+        <div class="col-sm p_sm h_xl flex_cent">
           <!-- SearchBar -->
           <input v-model="searchFilm" @formControl="searchMethod" class="h_sm" type="text" placeholder="Cerca un Film">
-          <button class="h_sm" type="submit">Cerca</button>  
+          <button @click.prevent="searchFilm" class="h_sm" type="submit">Cerca</button>  
         </div>
       </div>
     </div>
     <!-- Second Container  -->
-    <div class="container mar_top bg_try h_px_md mar_auto">
+    <div class="container mar_top bg_try h_px_lg mar_auto">
       <!-- Seconda Row -->
-      <div class="row h_xl bg_contrast">
-        <!-- Lista non ordinata per verificare il funzionamento della chiamata API -->
-        <ul style="color: red" v-for="(film, index) in movies" :key="index">
-          <li>{{film.original_title}}</li> 
-          <li>{{film.genre}}</li> 
-        </ul>
+      <div class="row h_xl bg_contrast flex_cent">
+        <!-- verificare il funzionamento della chiamata API -->
+        <!-- :movie="movie" v-for="(movie, index) in filtroFilms" :key="index" -->
+        <div v-for="movie in movies" :key="movie.id" class="card flex_col h_lg col-sm bg_try">
+          <!-- Immagine della card - da risolvere, ora gli creo solo uno spazio bianco -->
+          <div class="col-xl w_xl h_lg bg_crimson">
+          
+
+          </div>
+          <!-- Info della card -->
+          <div class="col-xl info w_xl h_md bg_crimson">
+            <!-- Titolo Della film card (sarà un H) -->
+            <p class="title">{{movie.title}}</p>  
+            <!-- Titolo originale (sara uno span) -->
+            <p class="title">{{movie.original_title}}</p>
+            <!-- Voto -->  
+            <p class="vote">{{movie.vote_average}}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -55,15 +68,15 @@ export default {
   },
   methods: {
     /* Method di richiamo API */
-    callApi() {
+    callApi(){
       axios
       .get(this.API_URL) // Richiamo Api tramite This
       .then((response) => {
-        this.movies = response.data // array(object) di film salvata in response.data
+        this.movies = response.data.results // array(object) di film salvata in response.data
+        /* Aggiornato con results poicè era annidato li dentro */
         /* this.loading = true : Questo valuta se serve poi */
       }).catch((error) => {
         console.error();
-        error;
         this.error = `Sorry There is a problem! ${error}`;
       }) 
     },
@@ -73,14 +86,6 @@ export default {
       console.log(this.searchFilm);
       state.searchFilm = this.searchFilm; 
       console.log(state.searchFilm); // Console log di verifica
-    }
-  },
-  computed: {
-    /* Filtro necessario per la ricerca dei film */
-    filtroFilms() {
-      return this.movies.filter(movie => {
-          return movie.name.toLowerCase().includes(state.searchFilm.toLowerCase())
-        })
     }
   },
   mounted() {
@@ -95,15 +100,12 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   /* Proprietà del id APP */
   width: 100vw; /* Altezza e larghezza */
   height: 100vh;
-  background-color: burlywood;
   margin: 0 auto; /* Centraggio Perfetto */
-  overflow-x: hidden; /* Nascosto Overflow */
-  overflow-y: hidden;
+  overflow-x: hidden; /* Nascosto Overflow X */
+  overflow-y: hidden; /* Nascosto Overflow Y */
 }
 
 /*#region Regole Principali di Col e Row  */
@@ -128,15 +130,28 @@ export default {
   width: calc(100% / 12) * 9; // Col LG è da 9
 }
 
+/* Bordo per rendere visibile, poi da rimuovere */
+.col-sm,
+.col-md,
+.col-lg {
+  border: 2px solid black;
+}
+
+
 /*#endregion */
 
 /* Colori di Prova, poi andranno rimossi */
 .bg_try {
-  background-color: crimson;
+  background-color: rgb(9, 72, 245);
 }
 .bg_contrast {
   background-color: rgb(226, 241, 3);
 }
+
+.bg_crimson {
+  background-color: crimson;
+}
+
 
 /* Larghezze di prova */
 .w_sm {
@@ -161,13 +176,13 @@ export default {
   margin-top: 50px;
 }
 
-
 /* Altezze di prova */
 .h_sm {
   height: 25%;
 }
 .h_md {
   height: 50%;
+  border: 2px solid black;
 }
 .h_lg {
   height: 75%;
@@ -184,7 +199,7 @@ export default {
   height: 250px;
 }
 .h_px_lg {
-  height: 250px;
+  height: 550px;
 }
 
 /* Regole di Dispaly Flex */
@@ -198,6 +213,25 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+
+.flex_col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Riquadro immagine in app */
+.square {
+  width: 90%;
+  height: 200px;
+  background-color: white;
+}
+
+
+
+
 
 
 </style>
