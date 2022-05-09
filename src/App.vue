@@ -11,28 +11,85 @@
         <!-- Input Type Text -->
         <div class="col-sm p_sm bg_contrast h_xl flex_cent">
           <!-- SearchBar -->
-          <input class="h_sm" type="text" placeholder="Cerca un Film">
+          <input v-model="searchFilm" @formControl="searchMethod" class="h_sm" type="text" placeholder="Cerca un Film">
           <button class="h_sm" type="submit">Cerca</button>  
         </div>
       </div>
     </div>
-    <!-- Second Container -->
+    <!-- Second Container  -->
+    <div class="container mar_top bg_try h_px_md mar_auto">
+      <!-- Seconda Row -->
+      <div class="row h_xl bg_contrast">
+        <!-- Lista non ordinata per verificare il funzionamento della chiamata API -->
+        <ul style="color: red" v-for="(film, index) in movies" :key="index">
+          <li>{{film.original_title}}</li> 
+          <li>{{film.genre}}</li> 
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 
+/* Import di Axios */
+import axios from "axios";
+/* Import dello state */
+import state from '@/state.js';
+
 export default {
   name: 'App',
   components: {
     // HelloWorld
+  },
+  data() {
+    return {
+      /* Ora è un film singolo */
+      API_URL: "https://api.themoviedb.org/3/search/movie?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&query=Blade%20Runner%202049&page=1&include_adult=false",
+      movies: null, // Array inizialmente vuoto
+      /* loading: true : per ora non so se serve */ 
+      error: null,
+      searchFilm: '' // Metodo per ricercare il film => questo nel v-model
+    };
+  },
+  methods: {
+    /* Method di richiamo API */
+    callApi() {
+      axios
+      .get(this.API_URL) // Richiamo Api tramite This
+      .then((response) => {
+        this.movies = response.data // array(object) di film salvata in response.data
+        /* this.loading = true : Questo valuta se serve poi */
+      }).catch((error) => {
+        console.error();
+        error;
+        this.error = `Sorry There is a problem! ${error}`;
+      }) 
+    },
+    /* Method per il search dell'input */
+    searchMethod(){
+      console.log('Searching...');
+      console.log(this.searchFilm);
+      state.searchFilm = this.searchFilm; 
+      console.log(state.searchFilm); // Console log di verifica
+    }
+  },
+  computed: {
+    /* Filtro necessario per la ricerca dei film */
+    filtroFilms() {
+      return this.movies.filter(movie => {
+          return movie.name.toLowerCase().includes(state.searchFilm.toLowerCase())
+        })
+    }
+  },
+  mounted() {
+    this.callApi() // richiamo la mia function nel mounted
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -99,6 +156,11 @@ export default {
 .mar_auto {
   margin: 0 auto;
 }
+
+.mar_top {
+  margin-top: 50px;
+}
+
 
 /* Altezze di prova */
 .h_sm {
