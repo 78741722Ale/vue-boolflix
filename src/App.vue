@@ -12,8 +12,8 @@
         <div class="col-sm p_sm h_xl flex_cent">
           <!-- SearchBar (al v-model viene dato l'input con var presente nello state) -->
           <input v-model="searchFilm" @formControl="searchMethod" class="h_sm" type="text" placeholder="Cerca un Film">
-          <!-- I film li mostro solo al click della mia function -->
-          <button @click="filtherFilms" class="h_sm" type="submit">Cerca</button>  
+          <!-- I film li mostro solo al click della mia function filtherFilms -->
+          <button @click="filtherFilms" class="h_sm" type="submit">Cerca un Film</button>  
         </div>
       </div>
     </div>
@@ -21,14 +21,16 @@
     <div class="container mar_top  bg_try mar_auto">
       <!-- Seconda Row -->
       <div class="row h_xl bg_contrast">
-        <!-- Ora lo Faccio come lista non ordinata -->
+        <!-- Ora lo Faccio come lista non ordinata, poi svilupperò la card -->
         <ul v-for="movie in movies" :key="movie.id">
             <!-- Titolo Della film card (sarà un H) -->
-            <li class="title"><h3>{{movie.title}}</h3></li>  
+            <li><h3>{{movie.title}}</h3></li>  
             <!-- Titolo originale (sara uno span) -->
-            <li class="title"><h5>{{movie.original_title}}</h5></li>
+            <li><h5>{{movie.original_title}}</h5></li> 
+            <!-- Lingua del Film prodotto -->
+            <li>{{movie.original_language}}</li>
             <!-- Voto -->  
-            <li class="vote">{{movie.vote_average}}</li>  
+            <li>{{movie.vote_average}}</li>  
         </ul>
       </div>
     </div>
@@ -52,7 +54,7 @@ export default {
     return {
       movies: null, // Array inizialmente vuoto
       /* loading: true : per ora non so se serve */ 
-      error: null,
+      /* error: null, : per ora non so se serve */
       searchFilm: '', // Metodo per ricercare il film => questo nel v-model
     };
   },
@@ -80,7 +82,7 @@ export default {
     }
   },
   mounted() {
-    this.callApi() // richiamo la mia function nel mounted
+    this.filtherFilms() // richiamo la mia function nel mounted
   }
 }
 </script>
