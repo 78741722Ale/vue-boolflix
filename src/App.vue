@@ -11,7 +11,7 @@
         <!-- Input Type Text -->
         <div class="col-sm p_sm h_xl flex_cent">
           <!-- SearchBar (al v-model viene dato l'input con var presente nello state) -->
-          <input v-model="searchFilm" @formControl="searchMethod" class="h_sm" type="text" placeholder="Cerca un Film">
+          <input v-model="searchFilm" @formControl="filtherFilms" class="h_sm" type="text" placeholder="Cerca un Film">
           <!-- I film li mostro solo al click della mia function filtherFilms -->
           <button @click="filtherFilms" class="h_sm" type="submit">Cerca un Film</button>  
         </div>
@@ -34,6 +34,20 @@
             <!-- Bandierine dei film -->
             <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(movie.original_language)" />
+        </ul>
+        <!-- Ora lista non ordinata per i list item di Series -->
+        <ul v-for="serie in series" :key="serie.id">
+            <!-- Titolo Della film card (sarà un H) -->
+            <li><h3>{{serie.name}}</h3></li>  
+            <!-- Titolo originale (sara uno span) -->
+            <li><h5>{{serie.original_name}}</h5></li> 
+            <!-- Lingua del Film prodotto -->
+            <li>{{serie.original_language}}</li>
+            <!-- Voto -->  
+            <li>{{serie.vote_average}} </li> 
+            <!-- Bandierine dei film -->
+            <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
+            <flag :iso="filtherFlag(serie.original_language)" />
         </ul>
       </div>
     </div>
@@ -60,14 +74,19 @@ export default {
       /* loading: true : per ora non so se serve */ 
       /* error: null, : per ora non so se serve */
       searchFilm: '', // Metodo per ricercare il film => questo nel v-model
+      /* URL DINAMICI */
+      Films : 'https://api.themoviedb.org/3/search/movie?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&page=1&include_adult=false&query=?',
+      Series : 'https://api.themoviedb.org/3/search/tv?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&page=1&include_adult=false&query=?'
     };
   },
   methods: {
     /* Method di richiamo API */
     filtherFilms(){
+
+      /* Prima Chiamata AXIOS */
       axios
       // Richiamo Api tramite This tramite template literal, altrimenti non riesco a mostrarla a schermo
-      .get(`https://api.themoviedb.org/3/search/movie?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&page=1&include_adult=false&query=?${this.searchFilm}`) 
+      .get(this.Films + this.searchFilm) 
       .then((response) => {
         this.movies = response.data.results // array(object) di film salvata in response.data
         /* Aggiornato con results poicè era annidato li dentro */
@@ -75,7 +94,19 @@ export default {
       }).catch((error) => {
         console.error();
         this.error = `Sorry There is a problem! ${error}`;
-      }) 
+      });
+      
+      /* Seconda Chiamata AXIOS */
+      axios
+      .get(this.Series + this.searchFilm)
+      .then((response) => {
+        this.series = response.data.results // array(object) di film salvata in response.data
+        /* Aggiornato con results poicè era annidato li dentro */
+        /* this.loading = true : Questo valuta se serve poi */
+      }).catch((error) => {
+        console.error();
+        this.error = `Sorry There is a problem! ${error}`;
+      });
     },
     /* Method per il search dell'input (servirà quando avro bisogno di Emit) */
     searchMethod(){
