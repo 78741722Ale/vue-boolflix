@@ -1,6 +1,26 @@
 /* Utilities del file App.vue */
 
+/* Import del foglio di stile bootstrap */
+@import '~/node_modules/bootstrap/scss/bootstrap.scss';
 
+/* Tutto per site_header (poi da esportare nel destructuring) */
+
+#site_header {
+  width: 100vw;
+  height: 100px;
+  background-color: #2E3A46;
+}
+
+/* Tutto per site_main (poi da esportare nel destructuring) */
+
+#site_main {
+  width: 100vw;
+  height: calc(100vh - 100px);
+  background-color: #1E2D3B;
+}
+
+
+/* Tutto per il file app.vue */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,20 +30,11 @@
   height: 100vh;
   margin: 0 auto; /* Centraggio Perfetto */
   overflow-x: hidden; /* Nascosto Overflow X */
-  /* overflow-y: hidden; */ /* Nascosto Overflow Y */
+  overflow-y: hidden; /* Nascosto Overflow Y */
 }
 
 /*#region Regole Principali di Col e Row  */
 
-/* Container Principale */
-.container {
-  width: 1200px;
-  /* Row - Regole*/
-  .row {
-    width: 100%;
-
-  }
-}
 
 /* Prime Colonne iniziali, andranno poi rimosse */
 .col-md {
