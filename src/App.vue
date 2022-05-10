@@ -24,18 +24,15 @@
         <!-- Ora lo Faccio come lista non ordinata, poi svilupperò la card -->
         <ul v-for="movie in movies" :key="movie.id">
             <!-- Immagine per le serie TV -->
-            <!-- <img :src="(ImageLink + movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
-            
             <!-- Condizione v-if -->
             <!-- Condizione 1 (senza errori) v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
-            <!-- Condizione 2 (con errori ma funzionante)  con Method => getImageFromAPI(movie.poster_path) -->
+            <!-- Condizione 2 <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
             <div v-if="(ImageLink + movie.poster_path) === brokeUrl">
               <div class="null_photo" alt="movie.title"></div>
             </div>
             <!-- Condizione V-else in cui appunto racchiudo l'immagine corretta --> 
             <div v-else>
               <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> 
-              <!-- <img :src="(ImageLink + movie.poster_path)" alt="movie.title">  -->
             </div>
             <!-- Titolo Della film card (sarà un H) -->
             <li><h3>{{movie.title}}</h3></li>  
@@ -48,6 +45,7 @@
             <!-- Bandierine dei film -->
             <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(movie.original_language)" />
+            <!-- Rating Star -->
             <!-- il vote_average è una stringa, la devo trasformare in numero ma dargli anche un arrotondamento -->
             <star-rating :rating="Math.ceil(parseInt(movie.vote_average) / value)" :read-only="true" :increment="0.01"> </star-rating>
             <!-- Metodo 1 -->
@@ -95,7 +93,7 @@
 import axios from "axios";
 /* Import dello state */
 import state from '@/state.js';
-/*  */
+/* Import dello star rating per le stelline */
 import StarRating from 'vue-star-rating'
 
 
