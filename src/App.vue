@@ -78,7 +78,7 @@
             <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(serie.original_language)" />
             <!-- Valore della votazione per le stelline -->
-            <li :value="filterValueFromApi(Math.ceil(parseInt(serie.vote_average) / value))">{{parseInt(element)}}</li>
+            <li :value="filterValueFromApi(Math.ceil(parseInt(serie.vote_average) / value))">{{Math.ceil(parseInt(serie.vote_average) / value)}}</li>
             <!-- Metodo 1 -->
             <!-- <li>{{Math.ceil(parseInt(serie.vote_average) / value)}}</li> -->
         </ul>
@@ -170,33 +170,22 @@ export default {
     filterValueFromApi(element) {
       if (element == 0) {
         console.log(`Quante stelle sono? ${element}`);
-        this.value = parseInt(element)
-        return this.value
+        return `<span>Dio bestia di satana</span>`
       }
       if(element == 1) {
         console.log(`Quante stelle sono? ${element}`);
-        this.value = parseInt(element)
-        return this.value
       }
       if(element == 2) {
         console.log(`Quante stelle sono? ${element}`);
-        this.value = parseInt(element)
-        return this.value
       }
       if(element == 3) {
         console.log(`Quante stelle sono? ${element}`);
-        this.value = parseInt(element)
-        return this.value
       }
       if(element == 4) {
         console.log(`Quante stelle sono? ${element}`);
-        this.value = parseInt(element)
-        return this.value
       }
       if (element == 5) {
         console.log(`Quante stelle sono? ${element}`);
-        this.value = parseInt(element)
-        return this.value
       } 
     },
     /** Method per richiamare il link prova 3/3
