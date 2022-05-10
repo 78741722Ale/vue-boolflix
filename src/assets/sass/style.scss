@@ -20,6 +20,30 @@
   overflow-y:auto
 }
 
+.card-body {
+    flex: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+
+    /* Immagini contenute al suo interno */
+    img {
+      width: 220px;
+      height: 320px;
+    }
+    .null_photo {
+        width: 220px;
+        height: 320px;
+    }
+    .h_title {
+      height: 60px;
+    }
+    .h_lang {
+      height: 50px;
+    }
+}
+
+
+
 
 /* Tutto per il file app.vue */
 #app {

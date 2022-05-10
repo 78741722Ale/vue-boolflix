@@ -26,92 +26,96 @@
         </div>
       </div>
     </div>
-    <!-- Site Header -->
+    <!-- Site Main -->
     <div id="site_main">
-      <!-- Second Container  -->
-      <div class="container mar_auto">
-        <!-- Seconda Row -->
-        <div class="row h-100 bg_contrast">
-          <!-- Ora lo Faccio come lista non ordinata, poi svilupperò la card -->
-          <ul v-for="movie in movies" :key="movie.id">
-            <!-- Immagine per le serie TV -->
+      <!-- Container cards  -->
+      <div class="container">
+        <!-- Row delle cards -->
+        <div class="row row-cols-5 gap-3 gy-3 h-100 align-items-center justify-content-center">
+          <!-- sviluppo la card per i movies -->
+          <div v-for="movie in movies" :key="movie.id" class="card-body d-flex align-items-start flex-column justify-content-center col-auto flex-wrap bg-danger">
             <!-- Condizione v-if -->
             <!-- Condizione 1 (senza errori) v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
             <!-- Condizione 2 <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
-            <div v-if="ImageLink + movie.poster_path === brokeUrl">
+            <div class="col-12" v-if="ImageLink + movie.poster_path === brokeUrl">
               <div class="null_photo" alt="movie.title"></div>
             </div>
             <!-- Condizione V-else in cui appunto racchiudo l'immagine corretta -->
-            <div v-else>
+            <div class="col-12" v-else>
               <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"/>
-            </div>
+            </div>  
             <!-- Titolo Della film card (sarà un H) -->
-            <li>
-              <h3>{{ movie.title }}</h3>
-            </li>
+            <div class="col-12 h_title bg-info d-flex justify-content-center align-items-center">
+              <h4 class="text-center mb-0">{{ movie.title }}</h4>  
+            </div>
             <!-- Titolo originale (sara uno span) -->
-            <li>
-              <h5>{{ movie.original_title }}</h5>
-            </li>
-            <!-- Lingua del Film prodotto -->
-            <li>{{ movie.original_language }}</li>
-            <!-- Voto -->
-            <li>{{ movie.vote_average }}</li>
-            <!-- Bandierine dei film -->
-            <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
-            <flag :iso="filtherFlag(movie.original_language)" />
-            <!-- Rating Star -->
-            <!-- il vote_average è una stringa, la devo trasformare in numero ma dargli anche un arrotondamento -->
-            <star-rating
-              :rating="Math.ceil(parseInt(movie.vote_average) / value)"
-              :read-only="true"
-              :increment="0.01"
-            >
-            </star-rating>
-            <!-- Metodo 1 -->
-            <!-- <li>{{Math.ceil(parseInt(movie.vote_average) / value)}}</li> -->
-          </ul>
-          <!-- Ora lista non ordinata per i list item di Series -->
-          <ul v-for="serie in series" :key="serie.id">
-            <!-- Ora condizione v-if nelle serie tv -->
-            <!-- Condizione 1 (funzionante ma zeppa di errori) =>  v-if="getImageFromAPI(serie.poster_path) === brokeUrl"-->
-            <!-- Condizione 2 (funzionante e senza errori) => v-if="(ImageLink + serie.poster_path) === brokeUrl" -->
-            <div v-if="ImageLink + serie.poster_path === brokeUrl">
+            <div class="col-12 h_title bg-success d-flex justify-content-center align-items-center">
+              <span class="text-center mb-0">{{ movie.original_title }}</span>  
+            </div>
+            <!-- Info film prodotto -->
+            <div class="col-12 gap-2 d-flex align-items-center justify-content-center">  
+                <!-- Lingua del Film prodotto -->
+                <span>{{ movie.original_language }}</span>
+                <!-- Bandierine dei film -->
+                <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
+                <flag :iso="filtherFlag(movie.original_language)" />
+            </div>  
+            <!-- Rating prodotto -->
+            <div class="col-6 d-flex flex-column align-items-center-justify-content-center">
+                <!-- Voto -->
+                <!-- <span>{{ movie.vote_average }}</span> -->
+                <star-rating
+                class="bg-warning"
+                :rating="Math.ceil(parseInt(movie.vote_average) / value)"
+                :read-only="true"
+                :increment="0.01"
+                > </star-rating>
+            </div>  
+          </div>
+          <!-- sviluppo la card per i series -->
+          <div v-for="serie in series" :key="serie.id" class="card-body d-flex align-items-start flex-column justify-content-center col-auto flex-wrap bg-danger">
+            <!-- Condizione v-if -->
+            <!-- Condizione 1 (senza errori) v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
+            <!-- Condizione 2 <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
+            <div class="col-12" v-if="ImageLink + serie.poster_path === brokeUrl">
               <div class="null_photo" alt="serie.title"></div>
             </div>
             <!-- Condizione V-else in cui appunto racchiudo l'immagine corretta -->
-            <div v-else>
+            <div class="col-12" v-else>
               <img :src="getImageFromAPI(serie.poster_path)" alt="serie.title"/>
-              <!-- <img :src="(ImageLink + movie.poster_path)" alt="serie.title">  -->
-            </div>
+            </div>      
             <!-- Titolo Della film card (sarà un H) -->
-            <li>
-              <h3>{{ serie.name }}</h3>
-            </li>
+            <div class="col-12 h_title bg-info d-flex justify-content-center align-items-center">
+              <h4 class="text-center mb-0">{{ serie.name }}</h4>  
+            </div>
             <!-- Titolo originale (sara uno span) -->
-            <li>
-              <h5>{{ serie.original_name }}</h5>
-            </li>
-            <!-- Lingua del Film prodotto -->
-            <li>{{ serie.original_language }}</li>
-            <!-- Voto -->
-            <li>{{ serie.vote_average }}</li>
-            <!-- Bandierine dei film -->
-            <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
-            <flag :iso="filtherFlag(serie.original_language)" />
-            <!-- Valore della votazione per le stelline -->
-            <star-rating
-              :rating="Math.ceil(parseInt(serie.vote_average) / value)"
-              :read-only="true"
-              :increment="0.01"
-            >
-            </star-rating>
-            <!-- <li :value="filterValueFromApi(Math.ceil(parseInt(serie.vote_average) / value))">{{Math.ceil(parseInt(serie.vote_average) / value)}}</li> -->
-            <!-- Metodo 1 -->
-            <!-- <li>{{Math.ceil(parseInt(serie.vote_average) / value)}}</li> -->
-          </ul>
+            <div class="col-12 h_title bg-success d-flex justify-content-center align-items-center">
+              <span class="text-center mb-0">{{ serie.original_name }}</span>  
+            </div>
+            <!-- Info serie prodotto -->
+            <div class="col-12 gap-2 d-flex align-items-center justify-content-center">  
+                <!-- Lingua della serie prodotto -->
+                <span>{{ serie.original_language }}</span>
+                <!-- Bandierine dei serie -->
+                <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
+                <flag :iso="filtherFlag(serie.original_language)" />
+            </div>    
+            <!-- Rating prodotto -->
+            <div class="col-6 d-flex flex-column align-items-center-justify-content-center">
+                <!-- Voto -->
+                <!-- <span>{{ serie.vote_average }}</span> -->
+                <!-- Valore della votazione per le stelline -->
+                <star-rating
+                class="bg-warning"
+                :rating="Math.ceil(parseInt(serie.vote_average) / value)"
+                :read-only="true"
+                :increment="0.01"
+                > </star-rating>
+            </div>  
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
