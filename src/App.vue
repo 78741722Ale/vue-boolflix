@@ -49,7 +49,9 @@
             <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(movie.original_language)" />
             <!-- il vote_average è una stringa, la devo trasformare in numero ma dargli anche un arrotondamento -->
-            <li>{{Math.ceil(parseInt(movie.vote_average) / value)}}</li>
+            <li :value="filterValueFromApi(Math.ceil(parseInt(movie.vote_average) / value))">{{Math.ceil(parseInt(movie.vote_average) / value)}}</li>
+            <!-- Metodo 1 -->
+            <!-- <li>{{Math.ceil(parseInt(movie.vote_average) / value)}}</li> -->
         </ul>
         <!-- Ora lista non ordinata per i list item di Series -->
         <ul v-for="serie in series" :key="serie.id">
@@ -76,7 +78,9 @@
             <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(serie.original_language)" />
             <!-- Valore della votazione per le stelline -->
-            <li>{{Math.ceil(parseInt(serie.vote_average) / value)}}</li>
+            <li :value="filterValueFromApi(Math.ceil(parseInt(serie.vote_average) / value))">{{parseInt(element)}}</li>
+            <!-- Metodo 1 -->
+            <!-- <li>{{Math.ceil(parseInt(serie.vote_average) / value)}}</li> -->
         </ul>
       </div>
     </div>
@@ -109,7 +113,7 @@ export default {
       // Spezzone di link necessario per far leggere l'immagine
       ImageLink : "https://image.tmdb.org/t/p/w342/",
       brokeUrl : "https://image.tmdb.org/t/p/w342/null",
-      value: "",
+      value: 2,
     };
   },
   methods: {
@@ -123,7 +127,6 @@ export default {
         this.movies = response.data.results // array(object) di film salvata in response.data
         /* Aggiornato con results poicè era annidato li dentro */
         /* this.loading = true : Questo valuta se serve poi */
-        this.value = 2
       }).catch((error) => {
         console.error();
         this.error = `Sorry There is a problem! ${error}`;
@@ -161,6 +164,41 @@ export default {
         return flagFilter
       }
     },
+    /**
+     * element => è il valore da recuperare nel list item
+     */
+    filterValueFromApi(element) {
+      if (element == 0) {
+        console.log(`Quante stelle sono? ${element}`);
+        this.value = parseInt(element)
+        return this.value
+      }
+      if(element == 1) {
+        console.log(`Quante stelle sono? ${element}`);
+        this.value = parseInt(element)
+        return this.value
+      }
+      if(element == 2) {
+        console.log(`Quante stelle sono? ${element}`);
+        this.value = parseInt(element)
+        return this.value
+      }
+      if(element == 3) {
+        console.log(`Quante stelle sono? ${element}`);
+        this.value = parseInt(element)
+        return this.value
+      }
+      if(element == 4) {
+        console.log(`Quante stelle sono? ${element}`);
+        this.value = parseInt(element)
+        return this.value
+      }
+      if (element == 5) {
+        console.log(`Quante stelle sono? ${element}`);
+        this.value = parseInt(element)
+        return this.value
+      } 
+    },
     /** Method per richiamare il link prova 3/3
      * element => Url dell'immagine API (incompleto)
      */
@@ -171,20 +209,6 @@ export default {
       // ovviamente devo ritornare senno non mi piglia niente!
       return this.ImageLink + element
     },
-    
-    /* 
-    getValueFromAPI(value) {
-      // Eseguo la chiamata axios con get del parametro
-      axios.get(value)
-      .then(response => response.data.results)
-      // ovviamente devo ritornare senno non mi piglia niente!
-      console.log(`Questo è il method necessario per ricavare il numero `);
-      return parseInt(this.value)
-
-    }
-    */
-
-
   },
   mounted() {
     this.filtherFilms() // richiamo la mia function nel mounted
