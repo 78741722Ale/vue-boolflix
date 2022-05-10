@@ -27,8 +27,8 @@
             <!-- <img :src="(ImageLink + movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
             
             <!-- Condizione v-if -->
-            <!-- Condizione 1 (con errori ma funzionante)  v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
-            <!-- Condizione 2 (senza errori) con Method => getImageFromAPI(movie.poster_path) -->
+            <!-- Condizione 1 (senza errori) v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
+            <!-- Condizione 2 (con errori ma funzionante)  con Method => getImageFromAPI(movie.poster_path) -->
             <div v-if="(ImageLink + movie.poster_path) === brokeUrl">
               <div class="null_photo" alt="movie.title"></div>
             </div>
@@ -44,10 +44,12 @@
             <!-- Lingua del Film prodotto -->
             <li>{{movie.original_language}}</li>
             <!-- Voto -->  
-            <li>{{movie.vote_average}} </li> 
+            <li>{{movie.vote_average}}</li> 
             <!-- Bandierine dei film -->
             <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(movie.original_language)" />
+            <!-- il vote_average è una stringa, la devo trasformare in numero ma dargli anche un arrotondamento -->
+            <li>{{Math.ceil(parseInt(movie.vote_average) / value)}}</li>
         </ul>
         <!-- Ora lista non ordinata per i list item di Series -->
         <ul v-for="serie in series" :key="serie.id">
@@ -73,6 +75,8 @@
             <!-- Bandierine dei film -->
             <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(serie.original_language)" />
+            <!-- Valore della votazione per le stelline -->
+            <li>{{Math.ceil(parseInt(serie.vote_average) / value)}}</li>
         </ul>
       </div>
     </div>
@@ -104,7 +108,8 @@ export default {
       Series : 'https://api.themoviedb.org/3/search/tv?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&page=1&include_adult=false&query=?',
       // Spezzone di link necessario per far leggere l'immagine
       ImageLink : "https://image.tmdb.org/t/p/w342/",
-      brokeUrl : "https://image.tmdb.org/t/p/w342/null"
+      brokeUrl : "https://image.tmdb.org/t/p/w342/null",
+      value: "",
     };
   },
   methods: {
@@ -118,6 +123,7 @@ export default {
         this.movies = response.data.results // array(object) di film salvata in response.data
         /* Aggiornato con results poicè era annidato li dentro */
         /* this.loading = true : Questo valuta se serve poi */
+        this.value = 2
       }).catch((error) => {
         console.error();
         this.error = `Sorry There is a problem! ${error}`;
@@ -162,31 +168,23 @@ export default {
       // Eseguo la chiamata axios con get del parametro
       axios.get(`${this.ImageLink + element}`)
       .then(response => response.data.results)
-      /* 
-      Salvo il bad Request da qualche parte 
-
-      this.brokeUrl = "https://image.tmdb.org/t/p/w342/null"
-      console.log(`Questo è il console log dell'errore ${this.brokeUrl}`); 
-      */
-      
-      /* Questo ciclo solo in caso di conditional 
-      
-      Avvio il ciclo per verificare la condizione in cui element (che è il mio url) é diverso dal mio brokeUrl 
-      if(element != this.brokeUrl) {
-      // Verifico in console log l'elemento
-        console.log(`C'è un errore con la visualizzazione di questo ${element}`);
-      } 
-      else {
-      // Verifico in console la chiamata Axios 
-      console.log(`Questo è l'elemento richiamato nel method getImageFromAPI : ${this.ImageLink + element}`);
-      }
-
-      */
-
       // ovviamente devo ritornare senno non mi piglia niente!
       return this.ImageLink + element
+    },
+    
+    /* 
+    getValueFromAPI(value) {
+      // Eseguo la chiamata axios con get del parametro
+      axios.get(value)
+      .then(response => response.data.results)
+      // ovviamente devo ritornare senno non mi piglia niente!
+      console.log(`Questo è il method necessario per ricavare il numero `);
+      return parseInt(this.value)
 
     }
+    */
+
+
   },
   mounted() {
     this.filtherFilms() // richiamo la mia function nel mounted
