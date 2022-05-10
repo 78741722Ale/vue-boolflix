@@ -27,13 +27,15 @@
             <!-- <img :src="(ImageLink + movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
             
             <!-- Condizione v-if -->
+            <!-- Condizione 1 (con errori ma funzionante)  v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
+            <!-- Condizione 2 (senza errori) con Method => getImageFromAPI(movie.poster_path) -->
             <div v-if="(ImageLink + movie.poster_path) === brokeUrl">
               <div class="null_photo" alt="movie.title"></div>
             </div>
             <!-- Condizione V-else in cui appunto racchiudo l'immagine corretta --> 
             <div v-else>
-              <img :src="(ImageLink + movie.poster_path)" alt="movie.title"> 
-              <!-- <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title">  -->
+              <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> 
+              <!-- <img :src="(ImageLink + movie.poster_path)" alt="movie.title">  -->
             </div>
             <!-- Titolo Della film card (sarà un H) -->
             <li><h3>{{movie.title}}</h3></li>  
@@ -49,8 +51,17 @@
         </ul>
         <!-- Ora lista non ordinata per i list item di Series -->
         <ul v-for="serie in series" :key="serie.id">
-            <!-- Immagine per le serie TV -->
-            <img :src="getImageFromAPI(serie.poster_path)" alt="serie.title">
+            <!-- Ora condizione v-if nelle serie tv -->
+            <!-- Condizione 1 (funzionante ma zeppa di errori) =>  v-if="getImageFromAPI(serie.poster_path) === brokeUrl"-->
+            <!-- Condizione 2 (funzionante e senza errori) => v-if="(ImageLink + serie.poster_path) === brokeUrl" -->
+            <div v-if="(ImageLink + serie.poster_path) === brokeUrl">
+              <div class="null_photo" alt="serie.title"></div>
+            </div>
+            <!-- Condizione V-else in cui appunto racchiudo l'immagine corretta --> 
+            <div v-else>
+              <img :src="getImageFromAPI(serie.poster_path)" alt="serie.title"> 
+              <!-- <img :src="(ImageLink + movie.poster_path)" alt="serie.title">  -->
+            </div>
             <!-- Titolo Della film card (sarà un H) -->
             <li><h3>{{serie.name}}</h3></li>  
             <!-- Titolo originale (sara uno span) -->

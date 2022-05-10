@@ -133,8 +133,9 @@ ul {
     }
 }
 
+/* Immagine di background in caso in cui non sia presente */
 .null_photo {
-    background-color: aqua;
+    background-image: url("https://picsum.photos/332/498");
     width: 332px; // larghezza fissa, identica a immagine di copertina
     height: 498px; // altezza fissa
 }
