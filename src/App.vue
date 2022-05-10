@@ -7,23 +7,21 @@
         <!-- First Row -->
         <div class="row row-cols-2 w-100 h-100 justify-content-between">
           <!-- Logo Sito Web -->
-          <div class="col-auto">
+          <div class="col-auto flex_cent">
             <img src="@/assets/logo.png" alt="Logo Del Sito" />
           </div>
           <!-- Input Type Text -->
-          <div class="col-auto">
+          <div class="col-auto flex_cent">
             <!-- SearchBar (al v-model viene dato l'input con var presente nello state) -->
             <input
               v-model="searchFilm"
               @formControl="filtherFilms"
-              class="h_sm"
               type="text"
+              class="p-2 mx-3"
               placeholder="Cerca un Film"
             />
             <!-- I film li mostro solo al click della mia function filtherFilms -->
-            <button @click="filtherFilms" class="h_sm" type="submit">
-              Cerca qualcosa
-            </button>
+            <button @click="filtherFilms" class="btn btn-danger p-2" type="submit">Cerca</button>
           </div>
         </div>
       </div>
