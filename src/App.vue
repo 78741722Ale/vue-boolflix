@@ -49,7 +49,7 @@
             <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(movie.original_language)" />
             <!-- il vote_average è una stringa, la devo trasformare in numero ma dargli anche un arrotondamento -->
-            <li :value="filterValueFromApi(Math.ceil(parseInt(movie.vote_average) / value))">{{Math.ceil(parseInt(movie.vote_average) / value)}}</li>
+            <star-rating :rating="Math.ceil(parseInt(movie.vote_average) / value)" :read-only="true" :increment="0.01"> </star-rating>
             <!-- Metodo 1 -->
             <!-- <li>{{Math.ceil(parseInt(movie.vote_average) / value)}}</li> -->
         </ul>
@@ -78,7 +78,8 @@
             <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
             <flag :iso="filtherFlag(serie.original_language)" />
             <!-- Valore della votazione per le stelline -->
-            <li :value="filterValueFromApi(Math.ceil(parseInt(serie.vote_average) / value))">{{Math.ceil(parseInt(serie.vote_average) / value)}}</li>
+            <star-rating :rating="Math.ceil(parseInt(serie.vote_average) / value)" :read-only="true" :increment="0.01"> </star-rating>
+            <!-- <li :value="filterValueFromApi(Math.ceil(parseInt(serie.vote_average) / value))">{{Math.ceil(parseInt(serie.vote_average) / value)}}</li> -->
             <!-- Metodo 1 -->
             <!-- <li>{{Math.ceil(parseInt(serie.vote_average) / value)}}</li> -->
         </ul>
@@ -94,11 +95,15 @@
 import axios from "axios";
 /* Import dello state */
 import state from '@/state.js';
+/*  */
+import StarRating from 'vue-star-rating'
+
 
 export default {
   name: 'App',
   components: {
     // HelloWorld
+    StarRating
   },
   data() {
     return {
@@ -163,30 +168,6 @@ export default {
       } else {
         return flagFilter
       }
-    },
-    /**
-     * element => è il valore da recuperare nel list item
-     */
-    filterValueFromApi(element) {
-      if (element == 0) {
-        console.log(`Quante stelle sono? ${element}`);
-        return `<span>Dio bestia di satana</span>`
-      }
-      if(element == 1) {
-        console.log(`Quante stelle sono? ${element}`);
-      }
-      if(element == 2) {
-        console.log(`Quante stelle sono? ${element}`);
-      }
-      if(element == 3) {
-        console.log(`Quante stelle sono? ${element}`);
-      }
-      if(element == 4) {
-        console.log(`Quante stelle sono? ${element}`);
-      }
-      if (element == 5) {
-        console.log(`Quante stelle sono? ${element}`);
-      } 
     },
     /** Method per richiamare il link prova 3/3
      * element => Url dell'immagine API (incompleto)
