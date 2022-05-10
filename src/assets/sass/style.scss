@@ -133,7 +133,10 @@ ul {
     }
 }
 
-.us_nation {
-    background-image: url('https://it.wikipedia.org/wiki/Bandiera_degli_Stati_Uniti_d%27America#/media/File:Flag_of_the_United_States_(Pantone).svg');
-    width: 15px;
+.null_photo {
+    background-image: url("https://picsum.photos/300/200");
+    width: 332px; // larghezza fissa, identica a immagine di copertina
+    height: 498px; // altezza fissa
 }
+
+
