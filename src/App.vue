@@ -25,8 +25,16 @@
         <ul v-for="movie in movies" :key="movie.id">
             <!-- Immagine per le serie TV -->
             <!-- <img :src="(ImageLink + movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
-            <!-- Avvio un v-show (che non va d'accordo con V-IF) -->
-            <img v-html="avaiable" :src="getImageFromAPI(movie.poster_path)" alt="movie.title">
+            
+            <!-- Condizione v-if -->
+            <div v-if="(ImageLink + movie.poster_path) === brokeUrl">
+              <div class="null_photo" alt="movie.title"></div>
+            </div>
+            <!-- Condizione V-else in cui appunto racchiudo l'immagine corretta --> 
+            <div v-else>
+              <img :src="(ImageLink + movie.poster_path)" alt="movie.title"> 
+              <!-- <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title">  -->
+            </div>
             <!-- Titolo Della film card (sarà un H) -->
             <li><h3>{{movie.title}}</h3></li>  
             <!-- Titolo originale (sara uno span) -->
@@ -84,9 +92,8 @@ export default {
       Films : 'https://api.themoviedb.org/3/search/movie?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&page=1&include_adult=false&query=?',
       Series : 'https://api.themoviedb.org/3/search/tv?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&page=1&include_adult=false&query=?',
       // Spezzone di link necessario per far leggere l'immagine
-      ImageLink : "https://image.tmdb.org/t/p/w342",
-      /* Classe da Bindare in caso di Foto Null */
-      avaiable : ".null_photo"
+      ImageLink : "https://image.tmdb.org/t/p/w342/",
+      brokeUrl : "https://image.tmdb.org/t/p/w342/null"
     };
   },
   methods: {
@@ -144,18 +151,27 @@ export default {
       // Eseguo la chiamata axios con get del parametro
       axios.get(`${this.ImageLink + element}`)
       .then(response => response.data.results)
-      /* Salvo il bad Request da qualche parte */
+      /* 
+      Salvo il bad Request da qualche parte 
+
       this.brokeUrl = "https://image.tmdb.org/t/p/w342/null"
-      console.log(`Questo è il console log dell'errore ${this.brokeUrl}`);
-      /* Avvio il ciclo per verificare la condizione in cui element (che è il mio url) é diverso dal mio brokeUrl */
+      console.log(`Questo è il console log dell'errore ${this.brokeUrl}`); 
+      */
+      
+      /* Questo ciclo solo in caso di conditional 
+      
+      Avvio il ciclo per verificare la condizione in cui element (che è il mio url) é diverso dal mio brokeUrl 
       if(element != this.brokeUrl) {
       // Verifico in console log l'elemento
         console.log(`C'è un errore con la visualizzazione di questo ${element}`);
       } 
       else {
-      /* Verifico in console la chiamata Axios */
+      // Verifico in console la chiamata Axios 
       console.log(`Questo è l'elemento richiamato nel method getImageFromAPI : ${this.ImageLink + element}`);
       }
+
+      */
+
       // ovviamente devo ritornare senno non mi piglia niente!
       return this.ImageLink + element
 
