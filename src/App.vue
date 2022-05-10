@@ -23,6 +23,8 @@
       <div class="row h_xl bg_contrast">
         <!-- Ora lo Faccio come lista non ordinata, poi svilupperò la card -->
         <ul v-for="movie in movies" :key="movie.id">
+            <img :src="(ImageLink + movie.poster_path)" alt="movie.title"> 
+            <!-- <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> -->
             <!-- Titolo Della film card (sarà un H) -->
             <li><h3>{{movie.title}}</h3></li>  
             <!-- Titolo originale (sara uno span) -->
@@ -76,13 +78,15 @@ export default {
       searchFilm: '', // Metodo per ricercare il film => questo nel v-model
       /* URL DINAMICI */
       Films : 'https://api.themoviedb.org/3/search/movie?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&page=1&include_adult=false&query=?',
-      Series : 'https://api.themoviedb.org/3/search/tv?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&page=1&include_adult=false&query=?'
+      Series : 'https://api.themoviedb.org/3/search/tv?api_key=98d2bdd48bfc7c3ba0b288ac94e06943&language=en-US&page=1&include_adult=false&query=?',
+      // Spezzone di link necessario per far leggere l'immagine
+      ImageLink: "https://image.tmdb.org/t/p/w350"
+    
     };
   },
   methods: {
     /* Method di richiamo API */
     filtherFilms(){
-
       /* Prima Chiamata AXIOS */
       axios
       // Richiamo Api tramite This tramite template literal, altrimenti non riesco a mostrarla a schermo
@@ -107,6 +111,10 @@ export default {
         console.error();
         this.error = `Sorry There is a problem! ${error}`;
       });
+
+      // Chiamata Axios per le immagini (?)
+
+
     },
     /* Method per il search dell'input (servirà quando avro bisogno di Emit) */
     searchMethod(){
@@ -127,6 +135,16 @@ export default {
       } else {
         return flagFilter
       }
+    },
+    /** Method per richiamare il link
+     * element => Url dell'immagine
+     */
+    getImageFromAPI(element) {
+      // Eseguo la chiamata axios con get del parametro
+      axios.get(`${this.ImageLink + element}`)
+      .then((response) =>  window.URL.createObjectURL(response.data.results))
+      // Verifico in console log l'elemento 
+      console.log(`Questo è l'elemento richiamato nel method getImageFromAPI : ${this.ImageLink + element}`);
     }
   },
   mounted() {
