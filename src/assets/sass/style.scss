@@ -17,7 +17,8 @@
   width: 100vw;
   height: calc(100vh - 100px);
   background-color: #1E2D3B;
-  overflow-y:auto
+  overflow-y:auto;
+  overflow-x:hidden
 }
 
 #site_main::-webkit-scrollbar {
