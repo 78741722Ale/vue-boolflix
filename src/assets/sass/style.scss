@@ -21,16 +21,16 @@
 }
 
 #site_main::-webkit-scrollbar {
-  width: 10px;  /* width of the entire scrollbar */
+  width: 8px;  /* width of the entire scrollbar */
 }
 
 #site_main::-webkit-scrollbar-track {
-  background: #dc3545;       /* color of the tracking area */
+  background: #1E2D3B;      /* color of the tracking area */
 }
 
 #site_main::-webkit-scrollbar-thumb {
-  background-color: #2E3A46;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
+  background-color: #dc3545;
+  border-radius: 15px;       /* roundness of the scroll thumb */
   border: 0.5px solid #dc3545;  /* creates padding around scroll thumb */
 }
 
