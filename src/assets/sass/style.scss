@@ -3,16 +3,45 @@
 /* Import del foglio di stile bootstrap */
 @import '~/node_modules/bootstrap/scss/bootstrap.scss';
 
-/* Tutto per site_header (poi da esportare nel destructuring) */
+/*#region Regole Principali del main style del componente APP */
 
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Proprietà del id APP */
+  width: 100vw; /* Altezza e larghezza */
+  height: 100vh;
+  margin: 0 auto; /* Centraggio Perfetto */
+  overflow-x: hidden; /* Nascosto Overflow X */
+  overflow-y: hidden; /* Nascosto Overflow Y */
+}
+
+/* Regole di Dispaly Flex */
+.flex_cent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.abs {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+/*#endregion */
+
+/*#region SiteHeader Classes */
 #site_header {
   width: 100vw;
   height: 100px;
   background-color: #2E3A46;
 }
+/*#endregion */
+
+/*#region SiteMain Classes */
 
 /* Tutto per site_main (poi da esportare nel destructuring) */
-
 #site_main {
   width: 100vw;
   height: calc(100vh - 100px);
@@ -21,21 +50,32 @@
   overflow-x:hidden
 }
 
+/* Scrollbar del main */
 #site_main::-webkit-scrollbar {
   width: 8px;  /* width of the entire scrollbar */
 }
-
 #site_main::-webkit-scrollbar-track {
   background: #1E2D3B;      /* color of the tracking area */
 }
-
 #site_main::-webkit-scrollbar-thumb {
   background-color: #dc3545;
   border-radius: 15px;       /* roundness of the scroll thumb */
   border: 0.5px solid #dc3545;  /* creates padding around scroll thumb */
 }
 
+ul {
+    padding-bottom: 2rem;
+    li {
+        line-height: 1.35rem;
+        list-style: none;
+    }
+}
 
+/*#endregion */
+
+/*#region SiteCards Classes */
+
+/* Card Principale */
 .card-body {
   padding-top: 15px !important;
     flex: 0 !important;
@@ -60,46 +100,14 @@
       border-top-right-radius: 10px;
       border-top-left-radius: 10px;
     }
-    /* Altezza che do al titolo */
-    .h_title {
-      height: 60px;
-    }
-
-    .h_lang {
-      height: 50px;
-    }
 }
 
-/* Tutto per il file app.vue */
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* Proprietà del id APP */
-  width: 100vw; /* Altezza e larghezza */
-  height: 100vh;
-  margin: 0 auto; /* Centraggio Perfetto */
-  overflow-x: hidden; /* Nascosto Overflow X */
-  overflow-y: hidden; /* Nascosto Overflow Y */
-}
-
-/*#region Regole Principali di Col e Row  */
-
-/*#endregion */
-
-/* Regole di Dispaly Flex */
-.flex_cent {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-ul {
-    padding-bottom: 2rem;
-    li {
-        line-height: 1.35rem;
-        list-style: none;
-    }
+/* Card nascosta - effetto hover */
+.card-body:hover .details {
+  background-color: #140c0c;
+  filter: opacity(95%);
+  color: white;
+  display: block;
 }
 
 /* Immagine di background in caso in cui non sia presente */
@@ -111,7 +119,6 @@ ul {
 }
 
 /* Colonna di testo vuoto da applicare nel V-FOR all over */
-
 .details {
   width: 100%;
   height: 100%;
@@ -134,28 +141,15 @@ ul {
 .details::-webkit-scrollbar {
   width: 6px;  
 }
-
 /* color of the tracking area */
 .details::-webkit-scrollbar-track {
   background: transparent;      
 }
-
 .details::-webkit-scrollbar-thumb {
   background-color: #dc3545;    /* color of the scroll thumb */
   border-radius: 20px;       /* roundness of the scroll thumb */
   border: 0.5px solid #dc3545;  /* creates padding around scroll thumb */
 }
 
-/* Card nascosta - effetto hover */
-.card-body:hover .details {
-  background-color: #140c0c;
-  filter: opacity(95%);
-  color: white;
-  display: block;
-}
+/*#endregion */
 
-.abs {
-  position: absolute;
-  top: 0%;
-  left: 0%;
-}
