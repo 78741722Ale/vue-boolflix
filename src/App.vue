@@ -21,7 +21,8 @@
               placeholder="Cerca un Film"
             />
             <!-- I film li mostro solo al click della mia function filtherFilms -->
-            <button @click="filtherFilms" class="btn btn-danger p-2" type="submit">Cerca</button>
+            <!-- Implementato il button disabilitato in caso di ricerca nulla  -->
+            <button :disabled="searchFilm.length < 1" @click="filtherFilms" class="btn btn-danger p-2" type="submit">Cerca</button>
           </div>
         </div>
       </div>
