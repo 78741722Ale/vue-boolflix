@@ -106,6 +106,7 @@ ul {
     background-image: url("https://picsum.photos/342/513");
     width: 342px; // larghezza fissa, identica a immagine di copertina
     height: 513px; // altezza fissa
+    border-radius: 10px;
 }
 
 /* Colonna di testo vuoto da applicare nel V-FOR all over */
@@ -118,11 +119,30 @@ ul {
   color: transparent;
   display: none;
   z-index: 10;
+  overflow-y:auto;
   /* Lista non ordinata */  
   ul {
     list-style: none;
     padding-left: 0;
   }
+}
+
+/* Stile dell overflow della card nascosta */
+
+/* width of the entire scrollbar */
+.details::-webkit-scrollbar {
+  width: 6px;  
+}
+
+/* color of the tracking area */
+.details::-webkit-scrollbar-track {
+  background: transparent;      
+}
+
+.details::-webkit-scrollbar-thumb {
+  background-color: #dc3545;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 0.5px solid #dc3545;  /* creates padding around scroll thumb */
 }
 
 /* Card nascosta - effetto hover */
