@@ -31,41 +31,45 @@
       <!-- Container cards  -->
       <div class="container">
         <!-- Row delle cards -->
-        <div class="row row-cols-5 gap-3 gy-3 h-100 align-items-center justify-content-center">
+        <div class="row row-cols-5 gap-3 p-5 gy-3 h-100 flex_cent">
           <!-- sviluppo la card per i movies -->
-          <div v-for="movie in movies" :key="movie.id" class="card-body d-flex align-items-start flex-column justify-content-center col-auto flex-wrap bg-danger">
+          <div v-for="movie in movies" :key="movie.id" class="card-body flex_cent flex-column col-auto flex-wrap">
             <!-- Condizione v-if -->
             <!-- Condizione 1 (senza errori) v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
             <!-- Condizione 2 <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
-            <div class="col-12" v-if="ImageLink + movie.poster_path === brokeUrl">
+            <div class="col-12 flex_cent w-100" v-if="ImageLink + movie.poster_path === brokeUrl">
               <div class="null_photo" alt="movie.title"></div>
             </div>
             <!-- Condizione V-else in cui appunto racchiudo l'immagine corretta -->
             <div class="col-12" v-else>
               <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"/>
             </div>  
-            <!-- Titolo Della film card (sarà un H) -->
-            <div class="col-12 h_title bg-info d-flex justify-content-center align-items-center">
+            <!-- Titolo Della film card -->
+            <div class="col-12 h_title flex_cent">
               <h4 class="text-center mb-0">{{ movie.title }}</h4>  
             </div>
-            <!-- Titolo originale (sara uno span) -->
-            <div class="col-12 h_title bg-success d-flex justify-content-center align-items-center">
-              <span class="text-center mb-0">{{ movie.original_title }}</span>  
-            </div>
             <!-- Info film prodotto -->
-            <div class="col-12 gap-2 d-flex align-items-center justify-content-center">  
+            <div class="col-12 gap-2 h_title flex_cent">
+              <!-- Titolo originale -->
+              <div class="col-6 d-flex justify-content-center align-items-center">
+                <span class="text-center mb-0">{{ movie.original_title }}</span>   
+              </div>
+              <!-- Lingua del Film prodotto -->
+              <div class="col-6 d-flex gap-3 justify-content-center align-items-center border-info">
                 <!-- Lingua del Film prodotto -->
-                <span>{{ movie.original_language }}</span>
+                <span>{{ movie.original_language }}</span>  
                 <!-- Bandierine dei film -->
                 <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
-                <flag :iso="filtherFlag(movie.original_language)" />
-            </div>  
+                <flag :iso="filtherFlag(movie.original_language)" />  
+              </div>
+            </div>
             <!-- Rating prodotto -->
-            <div class="col-6 d-flex flex-column align-items-center-justify-content-center">
+            <div class="col-12 flex_cent pb-3">
                 <!-- Voto -->
                 <!-- <span>{{ movie.vote_average }}</span> -->
                 <star-rating
-                class="bg-warning"
+                width="0"
+                heigth="0"
                 :rating="Math.ceil(parseInt(movie.vote_average) / value)"
                 :read-only="true"
                 :increment="0.01"
@@ -73,7 +77,7 @@
             </div>  
           </div>
           <!-- sviluppo la card per i series -->
-          <div v-for="serie in series" :key="serie.id" class="card-body d-flex align-items-start flex-column justify-content-center col-auto flex-wrap bg-danger">
+          <div v-for="serie in series" :key="serie.id" class="card-body flex_cent flex-column col-auto flex-wrap">
             <!-- Condizione v-if -->
             <!-- Condizione 1 (senza errori) v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
             <!-- Condizione 2 <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
@@ -84,29 +88,31 @@
             <div class="col-12" v-else>
               <img :src="getImageFromAPI(serie.poster_path)" alt="serie.title"/>
             </div>      
-            <!-- Titolo Della film card (sarà un H) -->
-            <div class="col-12 h_title bg-info d-flex justify-content-center align-items-center">
+            <!-- Titolo Della film card -->
+            <div class="col-12 h_title flex_cent">
               <h4 class="text-center mb-0">{{ serie.name }}</h4>  
             </div>
-            <!-- Titolo originale (sara uno span) -->
-            <div class="col-12 h_title bg-success d-flex justify-content-center align-items-center">
-              <span class="text-center mb-0">{{ serie.original_name }}</span>  
-            </div>
-            <!-- Info serie prodotto -->
-            <div class="col-12 gap-2 d-flex align-items-center justify-content-center">  
-                <!-- Lingua della serie prodotto -->
-                <span>{{ serie.original_language }}</span>
-                <!-- Bandierine dei serie -->
+            <!-- Info Serie prodotto -->
+            <div class="col-12 gap-2 h_title flex_cent">
+              <!-- Titolo originale -->
+              <div class="col-6 d-flex justify-content-center align-items-center">
+                <span class="text-center mb-0">{{ serie.original_name }}</span>   
+              </div>
+              <!-- Lingua del Film prodotto -->
+              <div class="col-6 d-flex gap-3 justify-content-center align-items-center border-info">
+                <!-- Lingua del Film prodotto -->
+                <span>{{ serie.original_language }}</span>  
+                <!-- Bandierine dei film -->
                 <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
-                <flag :iso="filtherFlag(serie.original_language)" />
-            </div>    
+                <flag :iso="filtherFlag(serie.original_language)" />  
+              </div>
+            </div>   
             <!-- Rating prodotto -->
-            <div class="col-6 d-flex flex-column align-items-center-justify-content-center">
+            <div class="col-12 flex_cent pb-3">
                 <!-- Voto -->
                 <!-- <span>{{ serie.vote_average }}</span> -->
                 <!-- Valore della votazione per le stelline -->
                 <star-rating
-                class="bg-warning"
                 :rating="Math.ceil(parseInt(serie.vote_average) / value)"
                 :read-only="true"
                 :increment="0.01"
