@@ -31,7 +31,7 @@
       <!-- Container cards  -->
       <div class="container">
         <!-- Row delle cards -->
-        <div class="row row-cols-5 gap-3 p-5 gy-3 h-100 flex_cent">
+        <div class="row row-cols-4 gap-4 p-5 gy-2 h-100 flex_cent">
           <!-- sviluppo la card per i movies -->
           <div v-for="movie in movies" :key="movie.id" class="card-body flex_cent flex-column col-auto flex-wrap">
             <!-- Condizione v-if -->

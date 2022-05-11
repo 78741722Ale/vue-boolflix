@@ -20,6 +20,21 @@
   overflow-y:auto
 }
 
+#site_main::-webkit-scrollbar {
+  width: 10px;  /* width of the entire scrollbar */
+}
+
+#site_main::-webkit-scrollbar-track {
+  background: #dc3545;       /* color of the tracking area */
+}
+
+#site_main::-webkit-scrollbar-thumb {
+  background-color: #2E3A46;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 0.5px solid #dc3545;  /* creates padding around scroll thumb */
+}
+
+
 .card-body {
   padding-top: 15px !important;
     flex: 0 !important;
@@ -27,7 +42,7 @@
     width: 100% !important;
     color: white;
     border-radius: 10px !important;
-    box-shadow: 0 0 15px rgb(180, 178, 178);
+    box-shadow: 0 0 10px rgb(112, 112, 112);
 
     /* Immagini contenute al suo interno */
     img {
@@ -58,9 +73,6 @@
     }
 }
 
-
-
-
 /* Tutto per il file app.vue */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -77,19 +89,6 @@
 /*#region Regole Principali di Col e Row  */
 
 /*#endregion */
-
-/* Colori di Prova, poi andranno rimossi */
-.bg_try {
-  background-color: rgb(9, 72, 245);
-}
-.bg_contrast {
-  background-color: rgb(226, 241, 3);
-}
-
-.bg_crimson {
-  background-color: crimson;
-}
-
 
 /* Regole di Dispaly Flex */
 .flex_cent {
