@@ -148,6 +148,7 @@ ul {
 /* Card nascosta - effetto hover */
 .card-body:hover .details {
   background-color: #140c0c;
+  filter: opacity(95%);
   color: white;
   display: block;
 }
