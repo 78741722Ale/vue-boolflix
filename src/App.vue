@@ -44,38 +44,6 @@
             <div class="col-12" v-else>
               <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"/>
             </div>  
-            <!-- Titolo Della film card -->
-            <div class="col-12 h_title flex_cent">
-              <h4 class="text-center mb-0">{{ movie.title }}</h4>  
-            </div>
-            <!-- Info film prodotto -->
-            <div class="col-12 gap-2 h_title flex_cent">
-              <!-- Titolo originale -->
-              <div class="col-6 d-flex justify-content-center align-items-center">
-                <span class="text-center mb-0">{{ movie.original_title }}</span>   
-              </div>
-              <!-- Lingua del Film prodotto -->
-              <div class="col-6 d-flex gap-3 justify-content-center align-items-center border-info">
-                <!-- Lingua del Film prodotto -->
-                <span>{{ movie.original_language }}</span>  
-                <!-- Bandierine dei film -->
-                <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
-                <flag :iso="filtherFlag(movie.original_language)" />  
-              </div>
-            </div>
-            <!-- Rating prodotto -->
-            <div class="col-12 flex_cent pb-3">
-                <!-- Voto -->
-                <!-- <span>{{ movie.vote_average }}</span> -->
-                <star-rating
-                width="0"
-                heigth="0"
-                :rating="Math.ceil(parseInt(movie.vote_average) / value)"
-                :read-only="true"
-                :increment="0.01"
-                :show-rating="false"
-                > </star-rating>
-            </div> 
             <!-- Dettagli scritti del prodotto, all'hover -->
             <div class="details abs">
                 <!-- Tutti i dettagli in lista non ordinata -->
@@ -84,27 +52,31 @@
                   <li><strong>Titolo: </strong>{{ movie.title }}</li>
                   <!-- Titolo Originale -->
                   <li><strong>Titolo Originale: </strong>{{ movie.original_title }}</li>
-                  <!-- Voto -->
+                  <!-- Rating Voto -->
                   <li class="pt-2">
                     <strong>Voto: </strong>
+                    <!-- Voto -->
+                    <!-- <span>{{ movie.vote_average }}</span> -->
                     <star-rating
-                      :width="10"
-                      :heigth="10"
                       :rating="Math.ceil(parseInt(movie.vote_average) / value)"
                       :read-only="true"
                       :increment="0.01"
                       :show-rating="false"> 
                     </star-rating> 
                   </li>
-
-
-
-
+                  <!-- OverView -->
+                  <li class="pt-3">
+                    <p><strong>Overview: </strong>{{ movie.overview }}</p>
+                  </li>
+                  <!-- Lingua del Film prodotto -->
+                  <!-- Bandierine dei film -->
+                  <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
+                  <li class="pt-3"><strong>Language :</strong> <span>{{ movie.original_language }}</span>  <flag :iso="filtherFlag(movie.original_language)" />  </li>
                 </ul> 
             </div>
           </div>
           <!-- sviluppo la card per i series -->
-          <div v-for="serie in series" :key="serie.id" class="card-body flex_cent flex-column col-auto flex-wrap">
+          <div v-for="serie in series" :key="serie.id" class="card-body position-relative flex_cent flex-column col-auto flex-wrap">
             <!-- Condizione v-if -->
             <!-- Condizione 1 (senza errori) v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
             <!-- Condizione 2 <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
@@ -115,36 +87,36 @@
             <div class="col-12" v-else>
               <img :src="getImageFromAPI(serie.poster_path)" alt="serie.title"/>
             </div>      
-            <!-- Titolo Della film card -->
-            <div class="col-12 h_title flex_cent">
-              <h4 class="text-center mb-0">{{ serie.name }}</h4>  
+            <!-- Dettagli scritti del prodotto, all'hover -->
+            <div class="details abs">
+                <!-- Tutti i dettagli in lista non ordinata -->
+                <ul>
+                  <!-- Titolo -->
+                  <li><strong>Titolo: </strong>{{ serie.name }}</li>
+                  <!-- Titolo Originale -->
+                  <li><strong>Titolo Originale: </strong>{{ serie.original_name }}</li>
+                  <!-- Rating Voto -->
+                  <li class="pt-2">
+                    <strong>Voto: </strong>
+                    <!-- Voto -->
+                    <!-- <span>{{ serie.vote_average }}</span> -->
+                    <star-rating
+                      :rating="Math.ceil(parseInt(serie.vote_average) / value)"
+                      :read-only="true"
+                      :increment="0.01"
+                      :show-rating="false"> 
+                    </star-rating> 
+                  </li>
+                  <!-- OverView -->
+                  <li class="pt-3">
+                    <p><strong>Overview: </strong>{{ serie.overview }}</p>
+                  </li>
+                  <!-- Lingua della serie prodotto -->
+                  <!-- Bandierine della serie -->
+                  <!-- bindo nell'iso la funziona con parametro che equivale a serie.original_language -->
+                  <li class="pt-3"><strong>Language :</strong> <span>{{ serie.original_language }}</span>  <flag :iso="filtherFlag(serie.original_language)" />  </li>
+                </ul> 
             </div>
-            <!-- Info Serie prodotto -->
-            <div class="col-12 gap-2 h_title flex_cent">
-              <!-- Titolo originale -->
-              <div class="col-6 d-flex justify-content-center align-items-center">
-                <span class="text-center mb-0">{{ serie.original_name }}</span>   
-              </div>
-              <!-- Lingua del Film prodotto -->
-              <div class="col-6 d-flex gap-3 justify-content-center align-items-center border-info">
-                <!-- Lingua del Film prodotto -->
-                <span>{{ serie.original_language }}</span>  
-                <!-- Bandierine dei film -->
-                <!-- bindo nell'iso la funziona con parametro che equivale a movie.original_language -->
-                <flag :iso="filtherFlag(serie.original_language)" />  
-              </div>
-            </div>   
-            <!-- Rating prodotto -->
-            <div class="col-12 flex_cent pb-3">
-                <!-- Voto -->
-                <!-- <span>{{ serie.vote_average }}</span> -->
-                <!-- Valore della votazione per le stelline -->
-                <star-rating
-                :rating="Math.ceil(parseInt(serie.vote_average) / value)"
-                :read-only="true"
-                :increment="0.01"
-                > </star-rating>
-            </div>  
           </div>
         </div>
       </div>

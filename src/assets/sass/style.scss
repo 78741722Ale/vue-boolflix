@@ -48,8 +48,7 @@
     img {
       width: 342px;
       height: 513px; 
-      border-top-right-radius: 10px ;
-      border-top-left-radius: 10px;
+      border-radius: 10px;
     } 
     /* Immagine segnaposto */
     .null_photo {
@@ -112,27 +111,25 @@ ul {
 /* Colonna di testo vuoto da applicare nel V-FOR all over */
 
 .details {
-  width: 342px;
-  height: 699px;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
-  background-color: transparent;
   padding: 1rem;
   color: transparent;
+  display: none;
+  z-index: 10;
   /* Lista non ordinata */  
   ul {
     list-style: none;
     padding-left: 0;
   }
-  star-rating {
-    color: transparent !important;
-  }
-
 }
 
 /* Card nascosta - effetto hover */
-.details:hover {
+.card-body:hover .details {
   background-color: #140c0c;
   color: white;
+  display: block;
 }
 
 .abs {
