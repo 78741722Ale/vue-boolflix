@@ -116,11 +116,23 @@ ul {
   height: 699px;
   border-radius: 10px;
   background-color: transparent;
+  padding: 1rem;
+  color: transparent;
+  /* Lista non ordinata */  
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  star-rating {
+    color: transparent !important;
+  }
+
 }
 
-
+/* Card nascosta - effetto hover */
 .details:hover {
-  background-color: #dc3545;
+  background-color: #140c0c;
+  color: white;
 }
 
 .abs {

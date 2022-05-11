@@ -78,7 +78,29 @@
             </div> 
             <!-- Dettagli scritti del prodotto, all'hover -->
             <div class="details abs">
+                <!-- Tutti i dettagli in lista non ordinata -->
+                <ul>
+                  <!-- Titolo -->
+                  <li><strong>Titolo: </strong>{{ movie.title }}</li>
+                  <!-- Titolo Originale -->
+                  <li><strong>Titolo Originale: </strong>{{ movie.original_title }}</li>
+                  <!-- Voto -->
+                  <li class="pt-2">
+                    <strong>Voto: </strong>
+                    <star-rating
+                      :width="10"
+                      :heigth="10"
+                      :rating="Math.ceil(parseInt(movie.vote_average) / value)"
+                      :read-only="true"
+                      :increment="0.01"
+                      :show-rating="false"> 
+                    </star-rating> 
+                  </li>
 
+
+
+
+                </ul> 
             </div>
           </div>
           <!-- sviluppo la card per i series -->
