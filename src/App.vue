@@ -31,9 +31,9 @@
       <!-- Container cards  -->
       <div class="container">
         <!-- Row delle cards -->
-        <div class="row row-cols-4 gap-4 p-5 gy-2 h-100 flex_cent">
+        <div class="row row-cols-4 gap-4 p-5 h-100 flex_cent">
           <!-- sviluppo la card per i movies -->
-          <div v-for="movie in movies" :key="movie.id" class="card-body flex_cent flex-column col-auto flex-wrap">
+          <div v-for="movie in movies" :key="movie.id" class="card-body position-relative flex_cent flex-column col-auto flex-wrap">
             <!-- Condizione v-if -->
             <!-- Condizione 1 (senza errori) v-if="(ImageLink + movie.poster_path) === brokeUrl" -->
             <!-- Condizione 2 <img :src="getImageFromAPI(movie.poster_path)" alt="movie.title"> | Metodo senza Function -->
@@ -73,8 +73,13 @@
                 :rating="Math.ceil(parseInt(movie.vote_average) / value)"
                 :read-only="true"
                 :increment="0.01"
+                :show-rating="false"
                 > </star-rating>
-            </div>  
+            </div> 
+            <!-- Dettagli scritti del prodotto, all'hover -->
+            <div class="details abs">
+
+            </div>
           </div>
           <!-- sviluppo la card per i series -->
           <div v-for="serie in series" :key="serie.id" class="card-body flex_cent flex-column col-auto flex-wrap">
@@ -121,7 +126,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>

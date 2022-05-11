@@ -68,9 +68,6 @@
     .h_lang {
       height: 50px;
     }
-    .vue-star-rating-rating-text {
-      color: purple !important;
-    }
 }
 
 /* Tutto per il file app.vue */
@@ -97,7 +94,6 @@
   align-items: center;
 }
 
-
 ul {
     padding-bottom: 2rem;
     li {
@@ -113,4 +109,22 @@ ul {
     height: 513px; // altezza fissa
 }
 
+/* Colonna di testo vuoto da applicare nel V-FOR all over */
 
+.details {
+  width: 342px;
+  height: 699px;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+
+.details:hover {
+  background-color: #dc3545;
+}
+
+.abs {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
