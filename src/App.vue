@@ -110,7 +110,7 @@
                   </li>
                   <!-- OverView -->
                   <li class="pt-3">
-                    <p><strong>Overview: </strong>{{ serie.overview }}</p>
+                    <span><strong>Overview: </strong>{{ serie.overview }}</span>
                   </li>
                   <!-- Lingua della serie prodotto -->
                   <!-- Bandierine della serie -->
